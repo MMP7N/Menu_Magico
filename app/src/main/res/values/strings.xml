@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Menu_Magico</string>
+    <string name="Username">Nombre de usuario</string>
+    <string name="Email">Correo electrónico</string>
+    <string name="Password">Contraseña</string>
+    <string name="Signup">Registrarse</string>
+    <string name="notLogin">¿Ya tienes cuenta? Inicia sesión</string>
+    <string name="notSignup">¿No tienes cuenta? Registrate</string>
+    <string name="Login">Iniciar sesion</string>
 </resources>
