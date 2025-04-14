@@ -21,10 +21,15 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     // Método para registrarse
-    fun signup(username: String, password: String, email: String) {
+    fun signup(username: String, password: String, email: String, name: String, profilePic: String) {
         viewModelScope.launch {
-            val insertRowId = databaseHelper.insertUser(username, password, email)
+            val insertRowId = databaseHelper.insertUser(username, password, email, name, profilePic)
             signupResult.postValue(insertRowId)
         }
+    }
+
+    // Método para obtener los detalles del usuario (nombre y foto de perfil)
+    fun getUserDetails(username: String): Map<String, String> {
+        return databaseHelper.getUserDetails(username)
     }
 }

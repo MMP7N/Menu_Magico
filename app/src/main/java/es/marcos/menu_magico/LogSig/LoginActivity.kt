@@ -12,6 +12,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private val authViewModel: ViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -20,8 +21,17 @@ class LoginActivity : AppCompatActivity() {
         // Observando el resultado del login
         authViewModel.loginResult.observe(this, { userExists ->
             if (userExists) {
-                Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, MainActivity::class.java)
+                val username = binding.loginUsername.text.toString()
+
+                // Obtener detalles del usuario (nombre y foto)
+                val userDetails = authViewModel.getUserDetails(username)
+
+                // Mostrar los detalles en MainActivity
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    putExtra("user_name", userDetails["name"])
+                    putExtra("profile_pic", userDetails["profile_pic"])
+                }
+                Toast.makeText(this, "Bienvenido ${userDetails["name"]}", Toast.LENGTH_SHORT).show()
                 startActivity(intent)
                 finish()
             } else {
