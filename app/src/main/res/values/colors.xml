@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="orange">#FF5722</color>
-    <color name="green">#FF388E3C</color>
-
-
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="red">#F44336</color>
+    <color name="gray">#808080</color>
+    <color name="light_gray">#F5F5F5</color>
+    <color name="green">#4CAF50</color>
+    <color name="dark_green">#388E3C</color>
+    <color name="accent">#FF9800</color>
+    <color name="bottom_nav_icon_color">#4CAF50</color>
+    <color name="background">#FAFAFA</color>
+    <color name="colorPrimary">#4CAF50</color>
+    <color name="gray_dark">#777777</color>
 </resources>

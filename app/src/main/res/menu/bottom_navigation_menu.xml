@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_recipes"
@@ -8,7 +7,7 @@
     <item
         android:id="@+id/nav_favorites"
         android:icon="@drawable/ic_favorite"
-        android:title="Recetas favoritas" />
+        android:title="Favoritos" />
 
     <item
         android:id="@+id/nav_profile"
@@ -18,5 +17,5 @@
     <item
         android:id="@+id/nav_shopping_list"
         android:icon="@drawable/ic_shopping_cart"
-        android:title="Lista de la compra" />
+        android:title="Compras" />
 </menu>
