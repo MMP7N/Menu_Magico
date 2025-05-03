@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_recipes -> selectedFragment = RecipesFragment() // Fragmento para Recetas
                 R.id.nav_favorites -> selectedFragment = FavoritesFragment() // Fragmento para Recetas Favoritas
                 R.id.nav_profile -> selectedFragment = ProfileFragment() // Fragmento para Perfil
-                R.id.nav_shopping_list -> selectedFragment = ShoppingListFragment() // Fragmento para Lista de la Compra
             }
 
             // Reemplazar el fragmento actual con el seleccionado

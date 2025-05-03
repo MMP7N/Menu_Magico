@@ -1,5 +1,6 @@
 package es.marcos.menu_magico.LogSig
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -16,7 +17,6 @@ class DatabaseHelper(context: Context) :
         private const val COLUMN_USERNAME = "username"
         private const val COLUMN_PASSWORD = "password"
         private const val COLUMN_EMAIL = "email"
-        private const val COLUMN_NAME = "name"
         private const val COLUMN_PROFILE_PIC = "profile_pic"
     }
 
@@ -26,8 +26,8 @@ class DatabaseHelper(context: Context) :
                     "$COLUMN_USERNAME TEXT, " +
                     "$COLUMN_PASSWORD TEXT, " +
                     "$COLUMN_EMAIL TEXT, " +
-                    "$COLUMN_NAME TEXT, " +
                     "$COLUMN_PROFILE_PIC TEXT)")
+
         db?.execSQL(createTableQuery)
     }
 
@@ -37,12 +37,11 @@ class DatabaseHelper(context: Context) :
         onCreate(db)
     }
 
-    fun insertUser(username: String, password: String, email: String, name: String, profilePic: String): Long {
+    fun insertUser(username: String, password: String, email: String, profilePic: String): Long {
         val values = ContentValues().apply {
             put(COLUMN_USERNAME, username)
             put(COLUMN_PASSWORD, password)
             put(COLUMN_EMAIL, email)
-            put(COLUMN_NAME, name)
             put(COLUMN_PROFILE_PIC, profilePic)
         }
         val db = writableDatabase
@@ -67,11 +66,12 @@ class DatabaseHelper(context: Context) :
         return userExists
     }
 
+    @SuppressLint("Range")
     fun getUserDetails(username: String): Map<String, String> {
         val db = readableDatabase
         val cursor = db.query(
             TABLE_NAME,
-            arrayOf(COLUMN_NAME, COLUMN_PROFILE_PIC),
+            arrayOf(COLUMN_PROFILE_PIC),
             "$COLUMN_USERNAME = ?",
             arrayOf(username),
             null,
@@ -80,7 +80,6 @@ class DatabaseHelper(context: Context) :
         )
         val userDetails = mutableMapOf<String, String>()
         if (cursor.moveToFirst()) {
-            userDetails["name"] = cursor.getString(cursor.getColumnIndex(COLUMN_NAME))
             userDetails["profile_pic"] = cursor.getString(cursor.getColumnIndex(COLUMN_PROFILE_PIC))
         }
         cursor.close()

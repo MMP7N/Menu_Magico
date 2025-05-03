@@ -33,10 +33,9 @@ class SignupActivity : AppCompatActivity() {
             val signupUsername = binding.signupUsername.text.toString()
             val signupPassword = binding.signupPassword.text.toString()
             val signupEmail = binding.signupEmail.text.toString()
-            val signupName = binding.signupName.text.toString()  // Nombre
-            val signupProfilePic = "ruta_a_la_imagen"  // Puedes agregar la lógica para subir la imagen más tarde
+            val signupProfilePic = "https://tse2.mm.bing.net/th/id/OIP.2cOe4ej-roywKGJXcvQQUQHaF7?rs=1&pid=ImgDetMain"
 
-            authViewModel.signup(signupUsername, signupPassword, signupEmail, signupName, signupProfilePic)
+            authViewModel.signup(signupUsername, signupPassword, signupEmail, signupProfilePic)
         }
 
         binding.loginRedirect.setOnClickListener {

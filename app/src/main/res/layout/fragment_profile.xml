@@ -69,12 +69,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/user_email" />
 
-    <TextView
+    <EditText
         android:id="@+id/preferences_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Vegetariano, sin gluten"
+        android:hint="Ingrese sus preferencias alimenticias"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,30 +94,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/preferences_content" />
 
-    <TextView
+    <EditText
         android:id="@+id/favorites_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Tomate, Albahaca, Queso"
+        android:hint="Ingrese ingredientes favoritos"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/favorites_title" />
 
+    <!-- Botón de guardar cambios -->
+
     <!-- Botón de cerrar sesión -->
+
+    <Button
+        android:id="@+id/save_changes_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="Guardar cambios"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/favorites_content" />
+
     <Button
         android:id="@+id/logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="@color/colorPrimary"
         android:text="Cerrar sesión"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/favorites_content" />
-
+        app:layout_constraintTop_toBottomOf="@id/save_changes_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>
