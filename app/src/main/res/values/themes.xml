@@ -1,12 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Menu_Magico" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.Menu_Magico" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-         <item name="colorPrimary">@color/orange</item>
-        <item name="colorPrimaryVariant">@color/orange</item>
-        <item name="android:statusBarColor">@color/orange</item>
+         <item name="colorPrimary">@color/green</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorAccent">@color/brown</item>
 
     </style>
 
-    <style name="Theme.Menu_Magico" parent="Base.Theme.Menu_Magico" />
-</resources>
+    <style name="ThemeOverlay.Search" parent="Theme.Menu_Magico">
+        <item name="android:editTextColor">@color/black</item>
+        <item name="android:textColorHint">@color/hintTextColor</item>
+
+    </style></resources>

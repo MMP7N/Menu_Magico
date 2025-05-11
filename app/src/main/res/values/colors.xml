@@ -3,7 +3,7 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="red">#F44336</color>
-    <color name="gray">#808080</color>
+    <color name="gray">#F5F5F5</color>
     <color name="light_gray">#F5F5F5</color>
     <color name="green">#4CAF50</color>
     <color name="dark_green">#388E3C</color>
@@ -11,6 +11,10 @@
     <color name="bottom_nav_icon_color">#4CAF50</color>
     <color name="background">#FAFAFA</color>
     <color name="colorPrimary">#4CAF50</color>
-    <color name="gray_dark">#777777</color>
+    <color name="gray_dark">#494949</color>
     <color name="orange">#FF5722</color>
+    <color name="brown">#804000</color>
+    <color name="hintTextColor">#787878</color>
+
+
 </resources>

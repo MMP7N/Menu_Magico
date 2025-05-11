@@ -1,45 +1,75 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/gray"
     android:orientation="vertical"
-    android:padding="16dp"
+    tools:context=".MainActivity"
     android:weightSum="1">
 
-    <!-- Título de la sección -->
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-medium"
-        android:paddingBottom="8dp"
-        android:text="Explora recetas"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- Descripción opcional bajo el título -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Descubre deliciosas recetas para cada día."
-        android:textColor="@color/gray"
-        android:textSize="16sp" />
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <!-- RecyclerView para mostrar las recetas -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recipesRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:layout_weight="1"
-        android:clipToPadding="false"
-        android:overScrollMode="never"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Recetas"
+                android:textSize="30sp"
+                android:textColor="@color/black"
+                android:padding="5pt" />
 
-</LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp">
+
+                <SearchView
+                    android:id="@+id/search_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/ThemeOverlay.Search"
+                    android:queryHint="Busca una receta"
+                    android:background="@drawable/search_bg"
+                    android:iconifiedByDefault="false"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_main_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:itemCount="1"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                tools:listitem="@layout/item_rv_main_category"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Categorias"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:padding="5pt" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_sub_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:itemCount="1"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                tools:listitem="@layout/item_rv_sub_category"/>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

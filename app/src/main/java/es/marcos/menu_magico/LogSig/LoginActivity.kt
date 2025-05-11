@@ -27,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
                 val userDetails = authViewModel.getUserDetails(username)
 
                 // Mostrar los detalles en MainActivity
-                val intent = Intent(this, MainActivity::class.java).apply {
+                val intent = Intent(this@LoginActivity, MainActivity::class.java).apply {
                     putExtra("user_name", userDetails["name"])
                     putExtra("profile_pic", userDetails["profile_pic"])
                 }

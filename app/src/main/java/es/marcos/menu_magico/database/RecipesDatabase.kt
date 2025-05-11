@@ -5,10 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import es.marcos.menu_magico.dao.RecipeDao
-import es.marcos.menu_magico.entities.Recipies
+import es.marcos.menu_magico.entities.CategoryItems
+import es.marcos.menu_magico.entities.Category
+import es.marcos.menu_magico.entities.Recipes
 
 
-@Database(entities = [Recipies::class], version = 1, exportSchema = false)
+@Database(entities = [Recipes::class, CategoryItems::class, Category::class, CategoryItems::class], version = 1, exportSchema = false)
 abstract class RecipesDatabase: RoomDatabase() {
 
     companion object{
