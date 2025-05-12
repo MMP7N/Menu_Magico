@@ -51,6 +51,13 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
 
     //navigation component
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.0")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.9.0")
+    implementation("androidx.navigation:navigation-ui-ktx:2.9.0")
+
+    //intuit
+    implementation ("com.intuit.sdp:sdp-android:1.0.6")
+    implementation ("com.intuit.ssp:ssp-android:1.0.6")
+
+    //gif
+    implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.17")
 }
