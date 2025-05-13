@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.recipesapp.pojo.Meal
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.recipesapp.activities.CategoryMealsActivity
 import com.example.recipesapp.activities.MealActivity
 import com.example.recipesapp.adapters.CategoriesAdapter
 import com.example.recipesapp.adapters.MostPopularAdapter
@@ -31,6 +31,7 @@ class HomeFragment : Fragment() {
         const val MEAL_ID = "com.example.recipesapp.fragments.idMeal"
         const val MEAL_NAME = "com.example.recipesapp.fragments.nameMeal"
         const val MEAL_THUMB = "com.example.recipesapp.fragments.thumbMeal"
+        const val CATEGORY_NAME = "com.example.recipesapp.fragments.categoryName"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,9 +66,19 @@ class HomeFragment : Fragment() {
         prepareCategoriesRecyclerView()
         homeMvvm.getCategories()
         observeCategoriesLiveData()
+        onCategoryClick()
 
 
     }
+
+    private fun onCategoryClick() {
+        categoriesAdapter.onItemClick = { category ->
+            val intent = Intent(activity, CategoryMealsActivity::class.java)
+            intent.putExtra(CATEGORY_NAME, category.strCategory)
+            startActivity(intent)
+        }
+    }
+
 
     private fun prepareCategoriesRecyclerView() {
         categoriesAdapter = CategoriesAdapter()
