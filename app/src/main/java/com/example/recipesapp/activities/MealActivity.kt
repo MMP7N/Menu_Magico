@@ -3,15 +3,18 @@ package com.example.recipesapp.activities
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.recipesapp.R
 import com.example.recipesapp.databinding.ActivityMealBinding
+import com.example.recipesapp.db.MealDatabase
 import com.example.recipesapp.fragments.HomeFragment
 import com.example.recipesapp.pojo.Meal
 import com.example.recipesapp.viewModel.MealViewModel
+import com.example.recipesapp.viewModel.MealViewModelFactory
 
 class MealActivity : AppCompatActivity() {
     private lateinit var mealId: String
@@ -26,7 +29,9 @@ class MealActivity : AppCompatActivity() {
         binding = ActivityMealBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        mealMvvm = ViewModelProvider(this).get(MealViewModel::class.java)
+        val mealDatabase = MealDatabase.getInstance(this)
+        val viewModelFactory = MealViewModelFactory(mealDatabase)
+        mealMvvm = ViewModelProvider(this, viewModelFactory)[MealViewModel::class.java]
 
         getInformationFromIntent()
 
@@ -38,6 +43,16 @@ class MealActivity : AppCompatActivity() {
         observerMealDetailsLiveData()
 
         onYoutubeImageClick()
+        onFavoriteButtonClick()
+    }
+
+    private fun onFavoriteButtonClick() {
+        binding.btnAddFav.setOnClickListener {
+            mealToSave?.let {
+                mealMvvm.insertMeal(it)
+                Toast.makeText(this, "Plato guardado", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun onYoutubeImageClick() {
@@ -47,17 +62,19 @@ class MealActivity : AppCompatActivity() {
         }
     }
 
+    private var mealToSave: Meal? = null
     private fun observerMealDetailsLiveData() {
         mealMvvm.observerMealDetailsLiveData().observe(this, object : Observer<Meal?> {
-            override fun onChanged(meal: Meal?) {
+            override fun onChanged(t: Meal?) {
                 onResponseCase()
-                meal?.let {
-                    binding.tvCategory.text = "Categoria: ${it.strCategory}"
-                    binding.tvArea.text = "Area: ${it.strArea}"
-                    binding.tvInstructions.text = it.strInstructions
+                val meal = t
+                mealToSave = meal
+                binding.tvCategory.text = "Categoria: ${meal!!.strCategory}"
+                binding.tvArea.text = "Area: ${meal.strArea}"
+                binding.tvInstructions.text = meal.strInstructions
 
-                    youtubeLink = it.strYoutube!!
-                }
+                youtubeLink = meal.strYoutube.toString()
+
             }
         })
     }
@@ -74,9 +91,9 @@ class MealActivity : AppCompatActivity() {
 
     private fun getInformationFromIntent() {
         val intent = intent
-        mealId = intent.getStringExtra(HomeFragment.MEAL_ID) !!
-        mealName = intent.getStringExtra(HomeFragment.MEAL_NAME) !!
-        mealThumb = intent.getStringExtra(HomeFragment.MEAL_THUMB) !!
+        mealId = intent.getStringExtra(HomeFragment.MEAL_ID)!!
+        mealName = intent.getStringExtra(HomeFragment.MEAL_NAME)!!
+        mealThumb = intent.getStringExtra(HomeFragment.MEAL_THUMB)!!
     }
 
     private fun loadingCase() {

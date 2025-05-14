@@ -69,9 +69,10 @@ dependencies {
     //gif
     implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.17")
 
-    //viewModel mvvm
+    //viewModel, ViewModelScope
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.9.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.0")
 
     //room
     implementation("androidx.room:room-runtime:2.7.1")
