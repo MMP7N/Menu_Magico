@@ -1,7 +1,6 @@
 package com.example.recipesapp.fragments
 
 import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.recipesapp.pojo.Meal
 import android.os.Bundle
@@ -13,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recipesapp.activities.CategoryMealsActivity
+import com.example.recipesapp.activities.MainActivity
 import com.example.recipesapp.activities.MealActivity
 import com.example.recipesapp.adapters.CategoriesAdapter
 import com.example.recipesapp.adapters.MostPopularAdapter
@@ -22,7 +22,7 @@ import com.example.recipesapp.viewModel.HomeViewModel
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var homeMvvm: HomeViewModel
+    private lateinit var viewModel: HomeViewModel
     private lateinit var randomMeal: Meal
     private lateinit var popularItemsAdapter: MostPopularAdapter
     private lateinit var categoriesAdapter: CategoriesAdapter
@@ -36,9 +36,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Usar ViewModelProvider de la manera actualizada
-        homeMvvm = ViewModelProvider(this).get(HomeViewModel::class.java)
-
+        viewModel = (activity as MainActivity).viewModel
         popularItemsAdapter = MostPopularAdapter()
     }
 
@@ -55,16 +53,16 @@ class HomeFragment : Fragment() {
 
         preparePopularItemsRecyclerView()
 
-        homeMvvm.getRandomMeal()
+        viewModel.getRandomMeal()
         observerRandomMeal()
         onRandomMealClick()
 
-        homeMvvm.getPopularItems()
+        viewModel.getPopularItems()
         observePopularItemsLiveData()
         onPopularItemClick()
 
         prepareCategoriesRecyclerView()
-        homeMvvm.getCategories()
+        viewModel.getCategories()
         observeCategoriesLiveData()
         onCategoryClick()
 
@@ -89,7 +87,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeCategoriesLiveData() {
-        homeMvvm.observeCategoriesLiveData().observe(viewLifecycleOwner, Observer { categories ->
+        viewModel.observeCategoriesLiveData().observe(viewLifecycleOwner, Observer { categories ->
             categoriesAdapter.setCategoryList(categories)
         })
     }
@@ -113,7 +111,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun observePopularItemsLiveData() {
-        homeMvvm.observePopularItemsLiveData().observe(
+        viewModel.observePopularItemsLiveData().observe(
             viewLifecycleOwner
         ) { mealList ->
             popularItemsAdapter.setMeals(mealsList = mealList as ArrayList<MealsByCategory>)
@@ -132,7 +130,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun observerRandomMeal() {
-        homeMvvm.observeRandomMealLiveData().observe(viewLifecycleOwner, { meal ->
+        viewModel.observeRandomMealLiveData().observe(viewLifecycleOwner, { meal ->
             Glide.with(this@HomeFragment)
                 .load(meal.strMealThumb)
                 .into(binding.imgRandomMeal)
