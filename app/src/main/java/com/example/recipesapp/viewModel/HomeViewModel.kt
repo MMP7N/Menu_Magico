@@ -18,18 +18,22 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+// ViewModel que maneja la lógica de la pantalla principal
 class HomeViewModel(
-    private  val mealDatabase: MealDatabase
+    private val mealDatabase: MealDatabase // Dependencia de la base de datos local
 ) : ViewModel() {
 
+    // LiveData para la comida aleatoria, elementos populares, categorías y comidas favoritas
     private var randomMealLiveData = MutableLiveData<Meal>()
     private var popularItemsLiveData = MutableLiveData<List<MealsByCategory>>()
     private var categoriesLiveData = MutableLiveData<List<Category>>()
-    private var favoriteMealsLiveData = mealDatabase.mealDao().getAllMeals()
+    private var favoriteMealsLiveData = mealDatabase.mealDao().getAllMeals() // Obtiene las comidas favoritas desde la base de datos local
 
+    // Función para obtener una comida aleatoria de la API
     fun getRandomMeal() {
         RetrofitInstance.api.getRandomMeal().enqueue(object : Callback<MealList> {
             override fun onResponse(call: Call<MealList>, response: Response<MealList>) {
+                // Si la respuesta es exitosa, se obtiene la primera comida aleatoria y se actualiza el LiveData
                 if (response.body() != null) {
                     val randomMeal = response.body()!!.meals[0]
                     randomMealLiveData.value = randomMeal
@@ -39,12 +43,14 @@ class HomeViewModel(
                 }
             }
 
+            // Si ocurre un error en la solicitud, se muestra en el log
             override fun onFailure(call: Call<MealList>, t: Throwable) {
                 Log.d("HomeFragment", t.message.toString())
             }
         })
     }
 
+    // Función para obtener los elementos populares de una categoría específica (por ejemplo, Seafood)
     fun getPopularItems() {
         RetrofitInstance.api.getPopularItems("Seafood")
             .enqueue(object : Callback<MealsByCategoryList> {
@@ -52,44 +58,51 @@ class HomeViewModel(
                     call: Call<MealsByCategoryList>,
                     response: Response<MealsByCategoryList>
                 ) {
+                    // Si la respuesta es exitosa, se actualiza el LiveData con los elementos populares
                     if (response.body() != null) {
                         popularItemsLiveData.value = response.body()!!.meals
                     }
                 }
 
+                // Si ocurre un error, se muestra en el log
                 override fun onFailure(call: Call<MealsByCategoryList>, t: Throwable) {
                     Log.d("HomeFragment", t.message.toString())
                 }
             })
     }
 
+    // Función para obtener las categorías de comidas desde la API
     fun getCategories() {
         RetrofitInstance.api.getCategories().enqueue(object : Callback<CategoryList> {
             override fun onResponse(call: Call<CategoryList>, response: Response<CategoryList>) {
+                // Si la respuesta es exitosa, se publica la lista de categorías en el LiveData
                 response.body()?.let { categoryList ->
                     categoriesLiveData.postValue(categoryList.categories)
-
                 }
             }
 
+            // Si ocurre un error, se muestra en el log
             override fun onFailure(c: Call<CategoryList>, t: Throwable) {
                 Log.d("HomeViewModel", t.message.toString())
             }
         })
     }
+
+    // Función para eliminar una comida de la base de datos local
     fun deleteMeal(meal: Meal) {
         viewModelScope.launch {
-            mealDatabase.mealDao().delete(meal)
+            mealDatabase.mealDao().delete(meal) // Elimina la comida usando el DAO de la base de datos
         }
     }
 
+    // Función para insertar o actualizar una comida en la base de datos local
     fun insertMeal(meal: Meal) {
         viewModelScope.launch {
-            mealDatabase.mealDao().update(meal)
-
+            mealDatabase.mealDao().update(meal) // Inserta o actualiza la comida usando el DAO de la base de datos
         }
     }
 
+    // Métodos para observar los LiveData correspondientes
     fun observeRandomMealLiveData(): LiveData<Meal> {
         return randomMealLiveData
     }

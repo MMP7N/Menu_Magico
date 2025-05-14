@@ -24,6 +24,7 @@ class MealActivity : AppCompatActivity() {
     private lateinit var youtubeLink: String
     private lateinit var mealMvvm: MealViewModel
 
+    // Configura la vista, obtiene los datos y define los listeners
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMealBinding.inflate(layoutInflater)
@@ -34,18 +35,15 @@ class MealActivity : AppCompatActivity() {
         mealMvvm = ViewModelProvider(this, viewModelFactory)[MealViewModel::class.java]
 
         getInformationFromIntent()
-
         setInformationInViews()
-
         loadingCase()
-
         mealMvvm.getMealDetail(mealId)
         observerMealDetailsLiveData()
-
         onYoutubeImageClick()
         onFavoriteButtonClick()
     }
 
+    // Maneja el click para agregar la comida a favoritos
     private fun onFavoriteButtonClick() {
         binding.btnAddFav.setOnClickListener {
             mealToSave?.let {
@@ -55,6 +53,7 @@ class MealActivity : AppCompatActivity() {
         }
     }
 
+    // Maneja el click para abrir el enlace de YouTube
     private fun onYoutubeImageClick() {
         binding.imgYoutube.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(youtubeLink))
@@ -63,6 +62,8 @@ class MealActivity : AppCompatActivity() {
     }
 
     private var mealToSave: Meal? = null
+
+    // Observa los datos de la comida y actualiza la UI
     private fun observerMealDetailsLiveData() {
         mealMvvm.observerMealDetailsLiveData().observe(this, object : Observer<Meal?> {
             override fun onChanged(t: Meal?) {
@@ -74,11 +75,11 @@ class MealActivity : AppCompatActivity() {
                 binding.tvInstructions.text = meal.strInstructions
 
                 youtubeLink = meal.strYoutube.toString()
-
             }
         })
     }
 
+    // Muestra la información básica en la vista
     private fun setInformationInViews() {
         Glide.with(applicationContext)
             .load(mealThumb)
@@ -89,6 +90,7 @@ class MealActivity : AppCompatActivity() {
         binding.collapsingToolbar.setExpandedTitleColor(resources.getColor(R.color.white))
     }
 
+    // Extrae la información del intent recibido
     private fun getInformationFromIntent() {
         val intent = intent
         mealId = intent.getStringExtra(HomeFragment.MEAL_ID)!!
@@ -96,6 +98,7 @@ class MealActivity : AppCompatActivity() {
         mealThumb = intent.getStringExtra(HomeFragment.MEAL_THUMB)!!
     }
 
+    // Muestra elementos de carga mientras llegan los datos
     private fun loadingCase() {
         binding.progressBar.visibility = android.view.View.VISIBLE
         binding.btnAddFav.visibility = android.view.View.INVISIBLE
@@ -103,9 +106,9 @@ class MealActivity : AppCompatActivity() {
         binding.tvCategory.visibility = android.view.View.INVISIBLE
         binding.tvArea.visibility = android.view.View.INVISIBLE
         binding.imgYoutube.visibility = android.view.View.INVISIBLE
-
     }
 
+    // Muestra los elementos de la UI cuando se obtienen los datos
     private fun onResponseCase() {
         binding.progressBar.visibility = android.view.View.INVISIBLE
         binding.btnAddFav.visibility = android.view.View.VISIBLE

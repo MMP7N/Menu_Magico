@@ -18,6 +18,7 @@ class CategoryMealsActivity : AppCompatActivity() {
     lateinit var categoryMealsViewModel: CategoryMealsViewModel
     lateinit var categoryMealsAdapter: CategoryMealsAdapter
 
+    // Inicializa la vista, configura RecyclerView y observa los datos de la categoría
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCategoryMealsBinding.inflate(layoutInflater)
@@ -35,6 +36,7 @@ class CategoryMealsActivity : AppCompatActivity() {
         })
     }
 
+    // Configura el RecyclerView con un GridLayoutManager y el adaptador
     private fun prepareRecyclerView() {
         categoryMealsAdapter = CategoryMealsAdapter()
         binding.rvMeals.apply {
@@ -42,5 +44,4 @@ class CategoryMealsActivity : AppCompatActivity() {
             adapter = categoryMealsAdapter
         }
     }
-
 }
