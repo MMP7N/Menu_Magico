@@ -1,20 +1,19 @@
 package com.example.recipesapp.activities
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.recipesapp.R
 import com.example.recipesapp.databinding.ActivityMealBinding
 import com.example.recipesapp.db.MealDatabase
 import com.example.recipesapp.fragments.HomeFragment
-import com.example.recipesapp.pojo.Meal
+import com.example.recipesapp.domain.model.Meal
 import com.example.recipesapp.viewModel.MealViewModel
 import com.example.recipesapp.viewModel.MealViewModelFactory
+import androidx.core.net.toUri
 
 class MealActivity : AppCompatActivity() {
     private lateinit var mealId: String
@@ -56,7 +55,7 @@ class MealActivity : AppCompatActivity() {
     // Maneja el click para abrir el enlace de YouTube
     private fun onYoutubeImageClick() {
         binding.imgYoutube.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(youtubeLink))
+            val intent = Intent(Intent.ACTION_VIEW, youtubeLink.toUri())
             startActivity(intent)
         }
     }
@@ -65,18 +64,17 @@ class MealActivity : AppCompatActivity() {
 
     // Observa los datos de la comida y actualiza la UI
     private fun observerMealDetailsLiveData() {
-        mealMvvm.observerMealDetailsLiveData().observe(this, object : Observer<Meal?> {
-            override fun onChanged(t: Meal?) {
-                onResponseCase()
-                val meal = t
-                mealToSave = meal
-                binding.tvCategory.text = "Categoria: ${meal!!.strCategory}"
-                binding.tvArea.text = "Area: ${meal.strArea}"
-                binding.tvInstructions.text = meal.strInstructions
+        mealMvvm.observerMealDetailsLiveData().observe(this
+        ) { t ->
+            onResponseCase()
+            val meal = t
+            mealToSave = meal
+            binding.tvCategory.text = "Categoria: ${meal!!.strCategory}"
+            binding.tvArea.text = "Area: ${meal.strArea}"
+            binding.tvInstructions.text = meal.strInstructions
 
-                youtubeLink = meal.strYoutube.toString()
-            }
-        })
+            youtubeLink = meal.strYoutube.toString()
+        }
     }
 
     // Muestra la información básica en la vista

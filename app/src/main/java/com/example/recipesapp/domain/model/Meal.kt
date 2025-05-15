@@ -1,4 +1,4 @@
-package com.example.recipesapp.pojo
+package com.example.recipesapp.domain.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

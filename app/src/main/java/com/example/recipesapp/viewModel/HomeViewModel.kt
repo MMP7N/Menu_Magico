@@ -6,12 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recipesapp.db.MealDatabase
-import com.example.recipesapp.pojo.Category
-import com.example.recipesapp.pojo.CategoryList
-import com.example.recipesapp.pojo.MealsByCategoryList
-import com.example.recipesapp.pojo.MealsByCategory
-import com.example.recipesapp.pojo.Meal
-import com.example.recipesapp.pojo.MealList
+import com.example.recipesapp.domain.model.Category
+import com.example.recipesapp.domain.model.CategoryList
+import com.example.recipesapp.domain.model.MealsByCategoryList
+import com.example.recipesapp.domain.model.MealsByCategory
+import com.example.recipesapp.domain.model.Meal
+import com.example.recipesapp.domain.model.MealList
 import com.example.recipesapp.retrofit.RetrofitInstance
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -27,7 +27,8 @@ class HomeViewModel(
     private var randomMealLiveData = MutableLiveData<Meal>()
     private var popularItemsLiveData = MutableLiveData<List<MealsByCategory>>()
     private var categoriesLiveData = MutableLiveData<List<Category>>()
-    private var favoriteMealsLiveData = mealDatabase.mealDao().getAllMeals() // Obtiene las comidas favoritas desde la base de datos local
+    private var favoriteMealsLiveData = mealDatabase.mealDao().getAllMeals()
+    private var bottomSheetMealLiveData = MutableLiveData<Meal>()
 
     // Función para obtener una comida aleatoria de la API
     fun getRandomMeal() {
@@ -88,6 +89,23 @@ class HomeViewModel(
         })
     }
 
+    fun getMealById(id: String) {
+        RetrofitInstance.api.getMealDetails(id).enqueue(object : Callback<MealList> {
+            override fun onResponse(call: Call<MealList>, response: Response<MealList>) {
+                // Si la respuesta es exitosa, se obtiene la comida por ID y se actualiza el LiveData
+                    val meal = response.body()?.meals?.first()
+                meal?.let{ meal ->
+                    bottomSheetMealLiveData.postValue(meal)
+                }
+            }
+
+            // Si ocurre un error en la solicitud, se muestra en el log
+            override fun onFailure(call: Call<MealList>, t: Throwable) {
+                Log.d("HomeViewModel", t.message.toString())
+            }
+        })
+    }
+
     // Función para eliminar una comida de la base de datos local
     fun deleteMeal(meal: Meal) {
         viewModelScope.launch {
@@ -118,4 +136,5 @@ class HomeViewModel(
     fun observeFavoriteMealsLiveData(): LiveData<List<Meal>> {
         return favoriteMealsLiveData
     }
+    fun observeBottomSheetMeal(): LiveData<Meal> = bottomSheetMealLiveData
 }

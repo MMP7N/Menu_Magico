@@ -6,12 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.recipesapp.R
 import com.example.recipesapp.activities.MainActivity
 import com.example.recipesapp.adapters.FavoriteMealsAdapter
 import com.example.recipesapp.databinding.FragmentFavoritesBinding

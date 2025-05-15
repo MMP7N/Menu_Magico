@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.recipesapp.R
 import com.example.recipesapp.databinding.CategoryItemBinding
-import com.example.recipesapp.pojo.Category
+import com.example.recipesapp.domain.model.Category
 
 class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.CategoryViewHolder>() {
 

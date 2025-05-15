@@ -1,4 +1,4 @@
-package com.example.recipesapp.pojo
+package com.example.recipesapp.domain.model
 
 data class Category(
     val idCategory: String,

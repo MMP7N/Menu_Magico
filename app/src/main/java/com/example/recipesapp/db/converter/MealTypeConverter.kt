@@ -20,6 +20,6 @@ class MealTypeConverter {
     fun fromStringToAny(attribute: String?): Any {
         if (attribute == null)
             return ""
-        return attribute as Any
+        return attribute
     }
 }

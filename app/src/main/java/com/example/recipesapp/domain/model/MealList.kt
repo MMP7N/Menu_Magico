@@ -1,4 +1,4 @@
-package com.example.recipesapp.pojo
+package com.example.recipesapp.domain.model
 
 data class MealList(
     val meals: List<Meal>

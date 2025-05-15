@@ -1,12 +1,9 @@
 package com.example.recipesapp.activities
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.recipesapp.R
 import com.example.recipesapp.adapters.CategoryMealsAdapter
 import com.example.recipesapp.databinding.ActivityCategoryMealsBinding
 import com.example.recipesapp.fragments.HomeFragment
@@ -30,10 +27,10 @@ class CategoryMealsActivity : AppCompatActivity() {
 
         categoryMealsViewModel.getMealsByCategory(intent.getStringExtra(HomeFragment.CATEGORY_NAME)!!)
 
-        categoryMealsViewModel.observeMealsLiveData().observe(this, Observer { mealsList ->
+        categoryMealsViewModel.observeMealsLiveData().observe(this) { mealsList ->
             binding.tvCategoryCount.text = mealsList.size.toString()
             categoryMealsAdapter.setMealsList(mealsList)
-        })
+        }
     }
 
     // Configura el RecyclerView con un GridLayoutManager y el adaptador

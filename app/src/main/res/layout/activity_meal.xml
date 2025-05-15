@@ -56,9 +56,9 @@
         <!-- ConstraintLayout -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <!-- LinearLayout -->
+            <!-- Categoría y área -->
             <LinearLayout
                 android:id="@+id/linear_layout"
                 android:layout_width="match_parent"
@@ -80,8 +80,7 @@
                     android:textStyle="bold"
                     android:drawableLeft="@drawable/ic_categories"
                     android:drawableTint="@color/g_black"
-                    android:layout_weight="1"
-                    style=""/>
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/tv_area"
@@ -92,7 +91,7 @@
                     android:textStyle="bold"
                     android:drawableLeft="@drawable/ic_area"
                     android:drawableTint="@color/g_black"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
             </LinearLayout>
 
             <!-- Instrucciones -->
@@ -101,24 +100,50 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="- Instrucciones:"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/linear_layout"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginStart="@dimen/_5sdp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/myfont"
-                android:textSize="@dimen/_15sdp"/>
+                android:textSize="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linear_layout" />
 
-            <!-- Instrucciones adicionales -->
             <TextView
                 android:id="@+id/tv_instructions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@id/tv_instructions_title"
-                app:layout_constraintTop_toBottomOf="@id/tv_instructions_title"
-                android:layout_marginTop="@dimen/_2sdp"
+                android:text="Aquí van las instrucciones completas..."
                 android:textColor="@color/black"
-                android:text="Aquí van las instrucciones completas..."/>
+                android:layout_marginTop="@dimen/_2sdp"
+                app:layout_constraintStart_toStartOf="@id/tv_instructions_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_instructions_title" />
+
+            <!-- Ingredientes título -->
+            <TextView
+                android:id="@+id/tv_ingredients_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="- Ingredientes:"
+                android:textColor="@color/black"
+                android:fontFamily="@font/myfont"
+                android:textSize="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                app:layout_constraintTop_toBottomOf="@id/tv_instructions"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- Ingredientes en cuadrícula -->
+            <GridLayout
+                android:id="@+id/grid_ingredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="3"
+                android:layout_margin="@dimen/_5sdp"
+                app:layout_constraintTop_toBottomOf="@id/tv_ingredients_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+                <!-- Aquí se inflan dinámicamente los ingredientes -->
+            </GridLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
@@ -130,15 +155,16 @@
         android:layout_height="@dimen/_40sdp"
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="@dimen/_10sdp"
-        android:src="@drawable/ic_youtube"/>
+        android:src="@drawable/ic_youtube" />
 
+    <!-- Barra de progreso -->
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/progress_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:indeterminate="true"
+        android:visibility="gone"
         app:layout_anchor="@id/appbar"
-        app:layout_anchorGravity="bottom"
-        android:visibility="gone"/>
+        app:layout_anchorGravity="bottom" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

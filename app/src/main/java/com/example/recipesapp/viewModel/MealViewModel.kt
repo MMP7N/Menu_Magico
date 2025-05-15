@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recipesapp.db.MealDatabase
-import com.example.recipesapp.pojo.Meal
-import com.example.recipesapp.pojo.MealList
+import com.example.recipesapp.domain.model.Meal
+import com.example.recipesapp.domain.model.MealList
 import com.example.recipesapp.retrofit.RetrofitInstance
 import kotlinx.coroutines.launch
 import retrofit2.Call

@@ -20,4 +20,8 @@
         android:name="com.example.recipesapp.fragments.FavoritesFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.recipesapp.fragments.ProfileFragment"
+        android:label="ProfileFragment" />
 </navigation>
