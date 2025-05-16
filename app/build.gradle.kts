@@ -56,7 +56,8 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
 
     //glide
-    implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation ("com.github.bumptech.glide:glide:4.15.1")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1")
 
     //navigation component
     implementation("androidx.navigation:navigation-fragment-ktx:2.9.0")

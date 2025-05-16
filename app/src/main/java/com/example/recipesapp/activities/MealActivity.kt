@@ -14,6 +14,7 @@ import com.example.recipesapp.domain.model.Meal
 import com.example.recipesapp.viewModel.MealViewModel
 import com.example.recipesapp.viewModel.MealViewModelFactory
 import androidx.core.net.toUri
+import com.example.recipesapp.adapters.IngredientsAdapter
 
 class MealActivity : AppCompatActivity() {
     private lateinit var mealId: String
@@ -22,6 +23,8 @@ class MealActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMealBinding
     private lateinit var youtubeLink: String
     private lateinit var mealMvvm: MealViewModel
+    private lateinit var ingredientsAdapter: IngredientsAdapter
+
 
     // Configura la vista, obtiene los datos y define los listeners
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +44,31 @@ class MealActivity : AppCompatActivity() {
         onYoutubeImageClick()
         onFavoriteButtonClick()
     }
+
+    private fun getIngredientsList(meal: Meal): List<IngredientsAdapter.Ingredient> {
+        val list = mutableListOf<IngredientsAdapter.Ingredient>()
+        val cls = meal::class.java
+        for (i in 1..20) {
+            val ingredientField = cls.getDeclaredField("strIngredient$i")
+            val measureField = cls.getDeclaredField("strMeasure$i")
+            ingredientField.isAccessible = true
+            measureField.isAccessible = true
+
+            val ingredient = ingredientField.get(meal) as? String
+            val measure = measureField.get(meal) as? String
+
+            if (!ingredient.isNullOrBlank() && !ingredient.equals("null", true)) {
+                list.add(
+                    IngredientsAdapter.Ingredient(
+                        name = ingredient.trim(),
+                        measure = measure?.trim() ?: ""
+                    )
+                )
+            }
+        }
+        return list
+    }
+
 
     // Maneja el click para agregar la comida a favoritos
     private fun onFavoriteButtonClick() {
@@ -64,17 +92,22 @@ class MealActivity : AppCompatActivity() {
 
     // Observa los datos de la comida y actualiza la UI
     private fun observerMealDetailsLiveData() {
-        mealMvvm.observerMealDetailsLiveData().observe(this
-        ) { t ->
+        mealMvvm.observerMealDetailsLiveData().observe(this) { meal ->
             onResponseCase()
-            val meal = t
             mealToSave = meal
+
             binding.tvCategory.text = "Categoria: ${meal!!.strCategory}"
             binding.tvArea.text = "Area: ${meal.strArea}"
             binding.tvInstructions.text = meal.strInstructions
-
             youtubeLink = meal.strYoutube.toString()
+
+            // Configuramos RecyclerView para ingredientes
+            val ingredients = getIngredientsList(meal)
+            ingredientsAdapter = IngredientsAdapter(ingredients)
+            binding.rvIngredients.layoutManager = androidx.recyclerview.widget.GridLayoutManager(this, 3)
+            binding.rvIngredients.adapter = ingredientsAdapter
         }
+
     }
 
     // Muestra la información básica en la vista

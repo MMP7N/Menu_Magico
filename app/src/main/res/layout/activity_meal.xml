@@ -40,17 +40,19 @@
         android:id="@+id/btn_add_fav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_10sdp"
         android:src="@drawable/ic_favorite"
         app:backgroundTint="@color/accent"
-        app:tint="@color/white"
         app:layout_anchor="@id/appbar"
         app:layout_anchorGravity="bottom|end"
-        android:layout_marginEnd="@dimen/_10sdp" />
+        app:tint="@color/white" />
 
     <!-- NestedScrollView -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="@dimen/_56ssp"
+        android:clipToPadding="false"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <!-- ConstraintLayout -->
@@ -63,35 +65,35 @@
                 android:id="@+id/linear_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/tv_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Categoria: Carne"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
+                    android:layout_weight="1"
                     android:drawableLeft="@drawable/ic_categories"
                     android:drawableTint="@color/g_black"
-                    android:layout_weight="1" />
+                    android:text="Categoria: Carne"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_area"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ciudad: Madrid"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
+                    android:layout_weight="1"
                     android:drawableLeft="@drawable/ic_area"
                     android:drawableTint="@color/g_black"
-                    android:layout_weight="1" />
+                    android:text="Ciudad: Madrid"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <!-- Instrucciones -->
@@ -99,12 +101,12 @@
                 android:id="@+id/tv_instructions_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/myfont"
                 android:text="- Instrucciones:"
                 android:textColor="@color/black"
-                android:fontFamily="@font/myfont"
                 android:textSize="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginStart="@dimen/_5sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/linear_layout" />
 
@@ -112,9 +114,9 @@
                 android:id="@+id/tv_instructions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
                 android:text="Aquí van las instrucciones completas..."
                 android:textColor="@color/black"
-                android:layout_marginTop="@dimen/_2sdp"
                 app:layout_constraintStart_toStartOf="@id/tv_instructions_title"
                 app:layout_constraintTop_toBottomOf="@id/tv_instructions_title" />
 
@@ -123,27 +125,25 @@
                 android:id="@+id/tv_ingredients_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/myfont"
                 android:text="- Ingredientes:"
                 android:textColor="@color/black"
-                android:fontFamily="@font/myfont"
                 android:textSize="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginStart="@dimen/_5sdp"
-                app:layout_constraintTop_toBottomOf="@id/tv_instructions"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_instructions" />
 
             <!-- Ingredientes en cuadrícula -->
-            <GridLayout
-                android:id="@+id/grid_ingredients"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvIngredients"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:columnCount="3"
                 android:layout_margin="@dimen/_5sdp"
-                app:layout_constraintTop_toBottomOf="@id/tv_ingredients_title"
+                android:columnCount="3"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
-                <!-- Aquí se inflan dinámicamente los ingredientes -->
-            </GridLayout>
+                app:layout_constraintTop_toBottomOf="@id/tv_ingredients_title" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
