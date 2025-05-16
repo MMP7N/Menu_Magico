@@ -95,8 +95,8 @@ class MealActivity : AppCompatActivity() {
             onResponseCase()
             mealToSave = meal
 
-            binding.tvCategory.text = "Categoría: ${meal?.strCategory ?: "N/A"}"
-            binding.tvArea.text = "Área: ${meal?.strArea ?: "N/A"}"
+            binding.tvCategory.text = "Category: ${meal?.strCategory ?: "N/A"}"
+            binding.tvArea.text = "Area: ${meal?.strArea ?: "N/A"}"
             binding.tvInstructions.text = meal?.strInstructions ?: ""
             youtubeLink = meal?.strYoutube ?: ""
 
@@ -118,7 +118,7 @@ class MealActivity : AppCompatActivity() {
         binding.btnAddFav.setOnClickListener {
             mealToSave?.let {
                 mealMvvm.insertMeal(it)
-                Toast.makeText(this, "Plato guardado", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Saved recipe", Toast.LENGTH_SHORT).show()
             }
         }
     }

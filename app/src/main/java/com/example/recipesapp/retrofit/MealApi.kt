@@ -15,11 +15,11 @@ interface MealApi {
     fun getRandomMeal(): Call<MealList>
 
     // Llama a la API para obtener los detalles de una comida en particular, usando su ID
-    @GET("lookup.php?")
+    @GET("lookup.php")
     fun getMealDetails(@Query("i") id: String): Call<MealList>
 
     // Llama a la API para obtener comidas populares filtradas por categoría
-    @GET("filter.php?")
+    @GET("filter.php")
     fun getPopularItems(@Query("c") categoryName: String): Call<MealsByCategoryList>
 
     // Llama a la API para obtener la lista de categorías de comidas
