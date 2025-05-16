@@ -7,23 +7,23 @@ import com.bumptech.glide.Glide
 import com.example.recipesapp.databinding.MealItemBinding
 import com.example.recipesapp.domain.model.MealsByCategory
 
-class CategoryMealsAdapter : RecyclerView.Adapter<CategoryMealsAdapter.CategoryMealsViewMolder>() {
+class CategoryMealsAdapter : RecyclerView.Adapter<CategoryMealsAdapter.CategoryMealsViewHolder>() {
 
     private var mealsList = ArrayList<MealsByCategory>()
 
     // Establece la lista de comidas por categoría y notifica los cambios
     fun setMealsList(mealsList: List<MealsByCategory>) {
-        this.mealsList = mealsList as ArrayList<MealsByCategory>
+        this.mealsList = ArrayList(mealsList)
         notifyDataSetChanged()
     }
 
     // ViewHolder para representar cada ítem de comida
-    inner class CategoryMealsViewMolder(val binding: MealItemBinding) :
+    inner class CategoryMealsViewHolder(val binding: MealItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     // Crea y devuelve un nuevo ViewHolder inflando el layout correspondiente
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryMealsViewMolder {
-        return CategoryMealsViewMolder(MealItemBinding.inflate(LayoutInflater.from(parent.context)))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryMealsViewHolder {
+        return CategoryMealsViewHolder(MealItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     // Devuelve la cantidad total de elementos en la lista
@@ -32,7 +32,7 @@ class CategoryMealsAdapter : RecyclerView.Adapter<CategoryMealsAdapter.CategoryM
     }
 
     // Asocia los datos de cada comida al ViewHolder correspondiente
-    override fun onBindViewHolder(holder: CategoryMealsViewMolder, position: Int) {
+    override fun onBindViewHolder(holder: CategoryMealsViewHolder, position: Int) {
         Glide.with(holder.itemView)
             .load(mealsList[position].strMealThumb)
             .into(holder.binding.imgMeal)

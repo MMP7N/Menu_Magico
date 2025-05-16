@@ -145,6 +145,7 @@
                 <!-- Aquí se inflan dinámicamente los ingredientes -->
             </GridLayout>
 
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

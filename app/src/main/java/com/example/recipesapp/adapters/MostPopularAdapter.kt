@@ -13,7 +13,7 @@ class MostPopularAdapter : RecyclerView.Adapter<MostPopularAdapter.PopularMealVi
     // Callback para manejar clics en los elementos de la lista
     lateinit var onItemClick: ((MealsByCategory) -> Unit)
 
-    var onLongItemClick: ((MealsByCategory) -> Unit) ? = null
+    var onLongItemClick: ((MealsByCategory) -> Unit)? = null
 
     // Lista de comidas más populares
     private var mealsList = ArrayList<MealsByCategory>()

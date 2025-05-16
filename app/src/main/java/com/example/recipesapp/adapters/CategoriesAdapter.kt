@@ -22,12 +22,12 @@ class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.CategoryViewHol
     }
 
     // ViewHolder que representa cada ítem de categoría
-    inner class CategoryViewHolder(binding: CategoryItemBinding) :
+    inner class CategoryViewHolder(val binding: CategoryItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     // Infla el layout del ítem de categoría y crea el ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
-        return CategoryViewHolder(CategoryItemBinding.inflate(LayoutInflater.from(parent.context)))
+        return CategoryViewHolder(CategoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     // Devuelve el número de elementos en la lista
@@ -37,15 +37,17 @@ class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.CategoryViewHol
 
     // Asocia los datos con cada ítem de la lista y gestiona el click
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
-        Glide.with(holder.itemView)
-            .load(categoriesList[position].strCategoryThumb)
-            .into(holder.itemView.findViewById<ImageView>(R.id.img_category))
+        val category = categoriesList[position]
 
-        holder.itemView.findViewById<TextView>(R.id.tv_category_name).text =
-            categoriesList[position].strCategory
+        Glide.with(holder.itemView)
+            .load(category.strCategoryThumb)
+            .into(holder.binding.imgCategory) // Usa el id real del binding
+
+        holder.binding.tvCategoryName.text = category.strCategory
 
         holder.itemView.setOnClickListener {
-            onItemClick?.invoke(categoriesList[position])
+            onItemClick?.invoke(category)
         }
     }
+
 }
