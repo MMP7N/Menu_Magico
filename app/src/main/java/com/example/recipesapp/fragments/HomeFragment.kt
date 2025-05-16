@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.recipesapp.R
 import com.example.recipesapp.activities.CategoryMealsActivity
 import com.example.recipesapp.activities.MainActivity
 import com.example.recipesapp.activities.MealActivity
@@ -68,6 +70,8 @@ class HomeFragment : Fragment() {
         observeCategoriesLiveData()
         onCategoryClick()
 
+        onSeacrhIconClick()
+
         // Clic normal → abrir BottomSheet
         popularItemsAdapter.onItemClick = { meal ->
             val bottomSheetFragment = MealBottomSheetFragment.newInstance(meal.idMeal)
@@ -78,6 +82,12 @@ class HomeFragment : Fragment() {
         popularItemsAdapter.onLongItemClick = { meal ->
             val bottomSheetFragment = MealBottomSheetFragment.newInstance(meal.idMeal)
             bottomSheetFragment.show(childFragmentManager, "Meal Info")
+        }
+    }
+
+    private fun onSeacrhIconClick() {
+        binding.imgSearch.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
         }
     }
 

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipesapp.activities.MainActivity
-import com.example.recipesapp.adapters.FavoriteMealsAdapter
+import com.example.recipesapp.adapters.MealsAdapter
 import com.example.recipesapp.databinding.FragmentFavoritesBinding
 import com.example.recipesapp.viewModel.HomeViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -19,7 +19,7 @@ class FavoritesFragment : Fragment() {
 
     private lateinit var binding: FragmentFavoritesBinding
     private lateinit var viewModel: HomeViewModel
-    private lateinit var favoritesAdapter: FavoriteMealsAdapter
+    private lateinit var favoritesAdapter: MealsAdapter
 
     // Se obtiene el ViewModel de la actividad principal para compartir datos entre fragmentos
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +42,17 @@ class FavoritesFragment : Fragment() {
 
         observeFavorites()  // Observa los cambios en las comidas favoritas
         prepareRecyclerView()  // Configura el RecyclerView
+        onMealClick()  // Configura el clic en los elementos de la lista
+    }
+
+    private fun onMealClick() {
+        favoritesAdapter.setOnMealClickListener { meal ->
+            val intent = android.content.Intent(activity, com.example.recipesapp.activities.MealActivity::class.java)
+            intent.putExtra(com.example.recipesapp.fragments.HomeFragment.MEAL_ID, meal.idMeal)
+            intent.putExtra(com.example.recipesapp.fragments.HomeFragment.MEAL_NAME, meal.strMeal)
+            intent.putExtra(com.example.recipesapp.fragments.HomeFragment.MEAL_THUMB, meal.strMealThumb)
+            startActivity(intent)
+        }
     }
 
     // Observamos el LiveData de comidas favoritas
@@ -56,7 +67,7 @@ class FavoritesFragment : Fragment() {
 
     // Configura el RecyclerView para mostrar los elementos en una cuadrícula
     private fun prepareRecyclerView() {
-        favoritesAdapter = FavoriteMealsAdapter()  // Instanciamos el adaptador
+        favoritesAdapter = MealsAdapter()  // Instanciamos el adaptador
         binding.rvFavorites.apply {
             layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)  // Configura el layout
             adapter = favoritesAdapter  // Asignamos el adaptador

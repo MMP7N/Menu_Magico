@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             app:contentScrim="@color/accent"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-            app:title="Nombre del plato">
+            app:title="Name of the meal">
 
             <ImageView
                 android:id="@+id/img_meal_detail"
@@ -80,7 +80,7 @@
                     android:layout_weight="1"
                     android:drawableLeft="@drawable/ic_categories"
                     android:drawableTint="@color/g_black"
-                    android:text="Categoria: Carne"
+                    android:text="Category: Carne"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 
@@ -91,7 +91,7 @@
                     android:layout_weight="1"
                     android:drawableLeft="@drawable/ic_area"
                     android:drawableTint="@color/g_black"
-                    android:text="Ciudad: Madrid"
+                    android:text="Area: Madrid"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -104,7 +104,7 @@
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:fontFamily="@font/myfont"
-                android:text="- Instrucciones:"
+                android:text="- Instructions:"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_15sdp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -128,7 +128,7 @@
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:fontFamily="@font/myfont"
-                android:text="- Ingredientes:"
+                android:text="- Ingredients:"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_15sdp"
                 app:layout_constraintStart_toStartOf="parent"

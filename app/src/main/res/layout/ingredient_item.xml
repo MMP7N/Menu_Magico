@@ -14,8 +14,8 @@
 
         <ImageView
             android:id="@+id/imageViewIngredient"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="@dimen/_50ssp"
+            android:layout_height="@dimen/_50ssp"
             android:src="@color/accent" />
 
         <LinearLayout

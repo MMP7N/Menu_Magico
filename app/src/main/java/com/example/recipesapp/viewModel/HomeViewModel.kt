@@ -29,6 +29,7 @@ class HomeViewModel(
     private var categoriesLiveData = MutableLiveData<List<Category>>()
     private var favoriteMealsLiveData = mealDatabase.mealDao().getAllMeals()
     private var bottomSheetMealLiveData = MutableLiveData<Meal>()
+    private val searchMealLiveData = MutableLiveData<List<Meal>>()
 
     // Función para obtener una comida aleatoria de la API
     fun getRandomMeal() {
@@ -120,7 +121,30 @@ class HomeViewModel(
         }
     }
 
+    // Función para buscar comidas por nombre
+    fun searchMeal(searchQuery: String) {
+        RetrofitInstance.api.searchMeal(searchQuery).enqueue(object : Callback<MealList> {
+            override fun onResponse(call: Call<MealList>, response: Response<MealList>) {
+                val mealList = response.body()?.meals
+                mealList?.let { meals ->
+                    // Se publica la lista de comidas encontradas en el LiveData
+                    searchMealLiveData.postValue(meals)
+                }
+            }
+
+            // Si ocurre un error, se muestra en el log
+            override fun onFailure(call: Call<MealList>, t: Throwable) {
+                Log.d("HomeViewModel", t.message.toString())
+            }
+        })
+    }
+
     // Métodos para observar los LiveData correspondientes
+
+    fun observeSearchMealLiveData(): LiveData<List<Meal>> {
+        return searchMealLiveData
+    }
+
     fun observeRandomMealLiveData(): LiveData<Meal> {
         return randomMealLiveData
     }
