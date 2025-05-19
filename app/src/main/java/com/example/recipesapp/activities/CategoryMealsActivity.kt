@@ -1,5 +1,6 @@
 package com.example.recipesapp.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -40,5 +41,14 @@ class CategoryMealsActivity : AppCompatActivity() {
             layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
             adapter = categoryMealsAdapter
         }
+
+        categoryMealsAdapter.onItemClick = { meal ->
+            val intent = Intent(this, MealActivity::class.java)
+            intent.putExtra(HomeFragment.MEAL_ID, meal.idMeal)          // id del plato
+            intent.putExtra(HomeFragment.MEAL_NAME, meal.strMeal)       // nombre del plato
+            intent.putExtra(HomeFragment.MEAL_THUMB, meal.strMealThumb) // imagen del plato
+            startActivity(intent)
+        }
     }
+
 }

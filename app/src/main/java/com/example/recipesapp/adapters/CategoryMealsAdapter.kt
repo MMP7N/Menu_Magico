@@ -11,33 +11,32 @@ class CategoryMealsAdapter : RecyclerView.Adapter<CategoryMealsAdapter.CategoryM
 
     private var mealsList = ArrayList<MealsByCategory>()
 
-    // Establece la lista de comidas por categoría y notifica los cambios
+    var onItemClick: ((MealsByCategory) -> Unit)? = null  // Añadido callback para click en plato
+
     fun setMealsList(mealsList: List<MealsByCategory>) {
         this.mealsList = ArrayList(mealsList)
         notifyDataSetChanged()
     }
 
-    // ViewHolder para representar cada ítem de comida
     inner class CategoryMealsViewHolder(val binding: MealItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    // Crea y devuelve un nuevo ViewHolder inflando el layout correspondiente
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryMealsViewHolder {
-        return CategoryMealsViewHolder(MealItemBinding.inflate(LayoutInflater.from(parent.context)))
+        return CategoryMealsViewHolder(MealItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
-    // Devuelve la cantidad total de elementos en la lista
-    override fun getItemCount(): Int {
-        return mealsList.size
-    }
+    override fun getItemCount(): Int = mealsList.size
 
-    // Asocia los datos de cada comida al ViewHolder correspondiente
     override fun onBindViewHolder(holder: CategoryMealsViewHolder, position: Int) {
+        val meal = mealsList[position]
         Glide.with(holder.itemView)
-            .load(mealsList[position].strMealThumb)
+            .load(meal.strMealThumb)
             .into(holder.binding.imgMeal)
 
-        holder.binding.tvMealName.text = mealsList[position].strMeal
+        holder.binding.tvMealName.text = meal.strMeal
+
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(meal)  // Lanzar callback al hacer click
+        }
     }
 }
-

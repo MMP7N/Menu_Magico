@@ -1,11 +1,13 @@
 package com.example.recipesapp.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.recipesapp.activities.CategoryMealsActivity
 import com.example.recipesapp.activities.MainActivity
 import com.example.recipesapp.adapters.CategoriesAdapter
 import com.example.recipesapp.databinding.FragmentCategoriesBinding
@@ -56,5 +58,11 @@ class CategoriesFragment : Fragment() {
             // Asigna el adaptador al RecyclerView
             adapter = categoriesAdapter
         }
+        categoriesAdapter.onItemClick = { category ->
+            val intent = Intent(requireContext(), CategoryMealsActivity::class.java)
+            intent.putExtra(HomeFragment.CATEGORY_NAME, category.strCategory)
+            startActivity(intent)
+        }
+
     }
 }
