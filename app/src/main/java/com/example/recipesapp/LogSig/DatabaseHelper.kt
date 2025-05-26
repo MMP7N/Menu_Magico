@@ -60,14 +60,16 @@ class DatabaseHelper(context: Context) :
     @SuppressLint("Range")
     fun getUserDetails(username: String): Map<String, String> {
         val db = readableDatabase
-        val cursor = db.query(TABLE_NAME, arrayOf(COLUMN_EMAIL, COLUMN_PROFILE_PIC),
+        val cursor = db.query(TABLE_NAME, arrayOf(COLUMN_USERNAME, COLUMN_EMAIL, COLUMN_PROFILE_PIC),
             "$COLUMN_USERNAME = ?", arrayOf(username), null, null, null)
         val userDetails = mutableMapOf<String, String>()
         if (cursor.moveToFirst()) {
+            userDetails["username"] = cursor.getString(cursor.getColumnIndex(COLUMN_USERNAME))
             userDetails["email"] = cursor.getString(cursor.getColumnIndex(COLUMN_EMAIL))
             userDetails["profile_pic"] = cursor.getString(cursor.getColumnIndex(COLUMN_PROFILE_PIC))
         }
         cursor.close()
         return userDetails
     }
+
 }

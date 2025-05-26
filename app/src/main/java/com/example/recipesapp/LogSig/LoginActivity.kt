@@ -1,5 +1,6 @@
 package com.example.recipesapp.LogSig
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -22,14 +23,23 @@ class LoginActivity : AppCompatActivity() {
                 val username = binding.loginUsername.text.toString()
                 val userDetails = authViewModel.getUserDetails(username)
 
+                val sharedPref = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)
+                with(sharedPref.edit()) {
+                    putString("username", userDetails["username"])
+                    putString("email", userDetails["email"])
+                    putString("profile_pic", userDetails["profile_pic"])
+                    apply()
+                }
+
+
                 // Aquí agregamos el nombre y el correo del usuario (o los datos que quieras pasar)
                 val intent = Intent(this@LoginActivity, MainActivity::class.java).apply {
-                    putExtra("user_name", userDetails["name"])      // Cambia "name" por la clave correcta de tu ViewModel
+                    putExtra("user_name", userDetails["username"])
                     putExtra("user_email", userDetails["email"])    // Cambia "email" por la clave correcta
                     putExtra("profile_pic", userDetails["profile_pic"])
                 }
 
-                Toast.makeText(this, "Bienvenido ${userDetails["name"]}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Bienvenido ${userDetails["username"]}", Toast.LENGTH_SHORT).show()
                 startActivity(intent)
                 finish()
             } else {
