@@ -1,58 +1,73 @@
 package com.example.recipesapp.fragments
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.recipesapp.LogSig.LoginActivity
 import com.example.recipesapp.R
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var userNameTextView: TextView
+    private lateinit var userEmailTextView: TextView
+    private lateinit var preferencesEditText: EditText
+    private lateinit var favoritesEditText: EditText
+    private lateinit var saveChangesButton: Button
+    private lateinit var logoutButton: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
-    }
+        val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
-    companion object {
-        private const val ARG_PARAM1 = "param1"
-        private const val ARG_PARAM2 = "param2"
+        // Inicializamos vistas
+        userNameTextView = view.findViewById(R.id.user_name)
+        userEmailTextView = view.findViewById(R.id.user_email)
+        preferencesEditText = view.findViewById(R.id.preferences_content)
+        favoritesEditText = view.findViewById(R.id.favorites_content)
+        saveChangesButton = view.findViewById(R.id.save_changes_button)
+        logoutButton = view.findViewById(R.id.logout_button)
 
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+        // Obtenemos datos de SharedPreferences
+        val sharedPref = requireActivity().getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)
+        val userName = sharedPref.getString("username", "Usuario")
+        val userEmail = sharedPref.getString("email", "usuario@email.com")
+
+        // Mostramos datos en pantalla
+        userNameTextView.text = userName
+        userEmailTextView.text = userEmail
+
+        // Botón de guardar cambios (puede guardar en SharedPreferences)
+        saveChangesButton.setOnClickListener {
+            val preferences = preferencesEditText.text.toString()
+            val favorites = favoritesEditText.text.toString()
+            sharedPref.edit().apply {
+                putString("preferences", preferences)
+                putString("favorites", favorites)
+                apply()
             }
+        }
+
+        // Botón de cerrar sesión
+        logoutButton.setOnClickListener {
+            sharedPref.edit().clear().apply() // Limpiamos las preferencias
+            val intent = Intent(requireActivity(), LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
+
+        // Mostrar datos guardados previamente si existen
+        preferencesEditText.setText(sharedPref.getString("preferences", ""))
+        favoritesEditText.setText(sharedPref.getString("favorites", ""))
+
+        return view
     }
 }

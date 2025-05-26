@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.recipesapp.databinding.ActivitySignupBinding
 
 class SignupActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivitySignupBinding
     private val authViewModel: ViewModel by viewModels()
 
@@ -17,30 +16,26 @@ class SignupActivity : AppCompatActivity() {
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Observando el resultado del signup
-        authViewModel.signupResult.observe(this, { insertRowId ->
+        authViewModel.signupResult.observe(this) { insertRowId ->
             if (insertRowId != -1L) {
                 Toast.makeText(this, "Acceso permitido", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             } else {
                 Toast.makeText(this, "Error de acceso", Toast.LENGTH_SHORT).show()
             }
-        })
+        }
 
         binding.signupButton.setOnClickListener {
-            val signupUsername = binding.signupUsername.text.toString()
-            val signupPassword = binding.signupPassword.text.toString()
-            val signupEmail = binding.signupEmail.text.toString()
-            val signupProfilePic = "https://tse2.mm.bing.net/th/id/OIP.2cOe4ej-roywKGJXcvQQUQHaF7?rs=1&pid=ImgDetMain"
-
-            authViewModel.signup(signupUsername, signupPassword, signupEmail, signupProfilePic)
+            val username = binding.signupUsername.text.toString()
+            val password = binding.signupPassword.text.toString()
+            val email = binding.signupEmail.text.toString()
+            val profilePic = "https://tse2.mm.bing.net/th/id/OIP.2cOe4ej-roywKGJXcvQQUQHaF7?rs=1&pid=ImgDetMain"
+            authViewModel.signup(username, password, email, profilePic)
         }
 
         binding.loginRedirect.setOnClickListener {
-            val loginIntent = Intent(this, LoginActivity::class.java)
-            startActivity(loginIntent)
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
     }

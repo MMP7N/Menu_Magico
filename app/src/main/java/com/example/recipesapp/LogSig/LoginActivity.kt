@@ -9,7 +9,6 @@ import com.example.recipesapp.activities.MainActivity
 import com.example.recipesapp.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityLoginBinding
     private val authViewModel: ViewModel by viewModels()
 
@@ -18,26 +17,25 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Observando el resultado del login
-        authViewModel.loginResult.observe(this, { userExists ->
+        authViewModel.loginResult.observe(this) { userExists ->
             if (userExists) {
                 val username = binding.loginUsername.text.toString()
-
-                // Obtener detalles del usuario (nombre y foto)
                 val userDetails = authViewModel.getUserDetails(username)
 
-                // Mostrar los detalles en MainActivity
+                // Aquí agregamos el nombre y el correo del usuario (o los datos que quieras pasar)
                 val intent = Intent(this@LoginActivity, MainActivity::class.java).apply {
-                    putExtra("user_name", userDetails["name"])
+                    putExtra("user_name", userDetails["name"])      // Cambia "name" por la clave correcta de tu ViewModel
+                    putExtra("user_email", userDetails["email"])    // Cambia "email" por la clave correcta
                     putExtra("profile_pic", userDetails["profile_pic"])
                 }
+
                 Toast.makeText(this, "Bienvenido ${userDetails["name"]}", Toast.LENGTH_SHORT).show()
                 startActivity(intent)
                 finish()
             } else {
                 Toast.makeText(this, "Nombre o contraseña incorrecto", Toast.LENGTH_SHORT).show()
             }
-        })
+        }
 
         binding.loginButton.setOnClickListener {
             val username = binding.loginUsername.text.toString()
@@ -46,8 +44,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.signupRedirect.setOnClickListener {
-            val intent = Intent(this, SignupActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, SignupActivity::class.java))
             finish()
         }
     }
