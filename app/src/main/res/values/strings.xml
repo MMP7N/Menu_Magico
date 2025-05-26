@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">RecipesApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Username">User name</string>
+    <string name="Email">Email</string>
+    <string name="Password">Password</string>
+    <string name="Signup">Signup</string>
+    <string name="notLogin">Already have an account? Sign in</string>
+    <string name="notSignup">Don´t have an account? Sign up</string>
+    <string name="Login">Login</string>
 </resources>
