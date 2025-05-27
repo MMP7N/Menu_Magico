@@ -52,31 +52,31 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     //retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.11.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 
     //glide
-    implementation ("com.github.bumptech.glide:glide:4.15.1")
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1")
+    implementation (libs.glide)
+    annotationProcessor (libs.compiler)
 
     //navigation component
-    implementation("androidx.navigation:navigation-fragment-ktx:2.9.0")
-    implementation("androidx.navigation:navigation-ui-ktx:2.9.0")
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
 
     //intuit
-    implementation ("com.intuit.sdp:sdp-android:1.0.6")
-    implementation ("com.intuit.ssp:ssp-android:1.0.6")
+    implementation (libs.sdp.android)
+    implementation (libs.ssp.android)
 
     //gif
-    implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.17")
+    implementation (libs.android.gif.drawable)
 
     //viewModel, ViewModelScope
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.9.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.0")
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
     //room
-    implementation("androidx.room:room-runtime:2.7.1")
-    kapt("androidx.room:room-compiler:2.7.1")
-    implementation("androidx.room:room-ktx:2.7.1")
+    implementation(libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
 }
