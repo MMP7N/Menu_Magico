@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.app.DatabaseHelper
 import kotlinx.coroutines.launch
 
 class ViewModel(application: Application) : AndroidViewModel(application) {
