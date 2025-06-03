@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Juan Pérez"
+        android:text="Marcos Medina"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="juanperez@email.com"
+        android:text="marcosmedina@email.com"
         android:textColor="@color/g_black"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Preferencias alimenticias"
+        android:text="Food preferences"
         android:textColor="@color/accent"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -74,7 +74,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:hint="Ingrese sus preferencias alimenticias"
+        android:hint="Enter your dietary preferences"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -87,7 +87,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Ingredientes favoritos"
+        android:text="Favorite ingredients"
         android:textColor="@color/accent"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -99,7 +99,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:hint="Ingrese ingredientes favoritos"
+        android:hint="Enter favorite ingredients"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -107,7 +107,6 @@
         app:layout_constraintTop_toBottomOf="@id/favorites_title" />
 
     <!-- Botón de guardar cambios -->
-
     <!-- Botón de cerrar sesión -->
 
     <Button
@@ -116,7 +115,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="140dp"
         android:backgroundTint="@color/accent"
-        android:text="Guardar cambios"
+        android:text="Save changes"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -128,7 +127,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:backgroundTint="@color/accent"
-        android:text="Cerrar sesión"
+        android:text="Sign out"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

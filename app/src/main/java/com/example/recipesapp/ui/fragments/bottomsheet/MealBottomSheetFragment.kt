@@ -32,7 +32,6 @@ class MealBottomSheetFragment : BottomSheetDialogFragment() {
         arguments?.let {
             mealId = it.getString(MEAL_ID)
         }
-        // Ya no hace falta asignar el viewModel aquí
     }
 
     override fun onCreateView(
@@ -68,7 +67,7 @@ class MealBottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     private fun observeBottomSheetMeal() {
-        viewModel.observeBottomSheetMeal().observe(viewLifecycleOwner, Observer { meal ->
+        viewModel.observeBottomSheetMeal().observe(viewLifecycleOwner) { meal ->
             Glide.with(this)
                 .load(meal.strMealThumb)
                 .into(binding.imgBottomSheet)
@@ -78,7 +77,7 @@ class MealBottomSheetFragment : BottomSheetDialogFragment() {
 
             mealName = meal.strMeal
             mealThumb = meal.strMealThumb
-        })
+        }
     }
 
     companion object {

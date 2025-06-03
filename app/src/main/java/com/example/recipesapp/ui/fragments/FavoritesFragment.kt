@@ -94,9 +94,9 @@ class FavoritesFragment : Fragment() {
                 // Mostramos un Snackbar para permitir deshacer la eliminación
                 Snackbar.make(
                     requireView(),
-                    "Plato eliminado",
+                    "Dish removed",
                     Snackbar.LENGTH_LONG
-                ).setAction("Deshacer") {
+                ).setAction("Undo") {
                     viewModel.insertMeal(deletedMeal)  // Restauramos la comida eliminada si el usuario desea deshacer
                 }.show()
             }

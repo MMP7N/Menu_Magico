@@ -70,7 +70,7 @@ class ProfileFragment : Fragment() {
             } else {
                 Toast.makeText(
                     requireContext(),
-                    "Permiso denegado para acceder a la galería",
+                    "Permission denied to access the gallery",
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -189,14 +189,14 @@ class ProfileFragment : Fragment() {
         val db = dbHelper.writableDatabase
         db.update("data", contentValues, "username = ?", arrayOf(username))
 
-        Toast.makeText(requireContext(), "Cambios guardados", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "Saved changes", Toast.LENGTH_SHORT).show()
     }
 
 
     private fun showImageSelectionDialog() {
-        val options = arrayOf("Elegir imagen de galería", "Introducir URL de imagen")
+        val options = arrayOf("Choose image from gallery", "Enter image URL")
         AlertDialog.Builder(requireContext())
-            .setTitle("Seleccionar imagen de perfil")
+            .setTitle("Select profile image")
             .setItems(options) { _, which ->
                 when (which) {
                     0 -> openGalleryWithPermissionCheck()
@@ -223,12 +223,12 @@ class ProfileFragment : Fragment() {
 
             shouldShowRequestPermissionRationale(permiso) -> {
                 AlertDialog.Builder(requireContext())
-                    .setTitle("Permiso requerido")
-                    .setMessage("Necesitamos permiso para acceder a tus imágenes para seleccionar foto de perfil")
-                    .setPositiveButton("Aceptar") { _, _ ->
+                    .setTitle("Permission required")
+                    .setMessage("We need permission to access your images to select your profile picture.")
+                    .setPositiveButton("Accept") { _, _ ->
                         requestPermissionLauncher.launch(permiso)
                     }
-                    .setNegativeButton("Cancelar", null)
+                    .setNegativeButton("Cancel", null)
                     .show()
             }
 
@@ -249,9 +249,9 @@ class ProfileFragment : Fragment() {
         input.hint = "https://ejemplo.com/miimagen.jpg"
 
         AlertDialog.Builder(requireContext())
-            .setTitle("Introducir URL de imagen")
+            .setTitle("Enter image URL")
             .setView(input)
-            .setPositiveButton("Aceptar") { _, _ ->
+            .setPositiveButton("Accept") { _, _ ->
                 val url = input.text.toString().trim()
                 if (url.isNotEmpty()) {
                     currentProfileImageUrl = url
@@ -267,10 +267,10 @@ class ProfileFragment : Fragment() {
                         remove("profile_pic_uri_temp")
                     }
                 } else {
-                    Toast.makeText(requireContext(), "URL vacía", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "empty url", Toast.LENGTH_SHORT).show()
                 }
             }
-            .setNegativeButton("Cancelar", null)
+            .setNegativeButton("Cancel", null)
             .show()
     }
 }

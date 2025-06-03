@@ -39,11 +39,11 @@ class LoginActivity : AppCompatActivity() {
                     putExtra("profile_pic", userDetails["profile_pic"])
                 }
 
-                Toast.makeText(this, "Bienvenido ${userDetails["username"]}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Welcome ${userDetails["username"]}", Toast.LENGTH_SHORT).show()
                 startActivity(intent)
                 finish()
             } else {
-                Toast.makeText(this, "Nombre o contraseña incorrecto", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Incorrect name or password", Toast.LENGTH_SHORT).show()
             }
         }
 
