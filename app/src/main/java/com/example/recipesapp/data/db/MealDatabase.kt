@@ -3,7 +3,7 @@ package com.example.recipesapp.db
 import android.content.Context
 import androidx.room.*
 import com.example.recipesapp.db.dao.MealDao
-import com.example.recipesapp.domain.model.Meal
+import com.example.recipesapp.data.db.entity.Meal
 
 // Esta clase es la base de datos que usa Room para almacenar datos relacionados con las comidas.
 // Define la base de datos y proporciona el acceso a las operaciones de la base de datos (DAO).

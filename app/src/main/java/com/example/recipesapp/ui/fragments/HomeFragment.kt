@@ -17,8 +17,8 @@ import com.example.recipesapp.activities.MealActivity
 import com.example.recipesapp.adapters.CategoriesAdapter
 import com.example.recipesapp.adapters.MostPopularAdapter
 import com.example.recipesapp.databinding.FragmentHomeBinding
-import com.example.recipesapp.domain.model.Meal
-import com.example.recipesapp.domain.model.MealsByCategory
+import com.example.recipesapp.data.db.entity.Meal
+import com.example.recipesapp.data.db.entity.MealsByCategory
 import com.example.recipesapp.fragments.bottomsheet.MealBottomSheetFragment
 import com.example.recipesapp.viewModel.HomeViewModel
 

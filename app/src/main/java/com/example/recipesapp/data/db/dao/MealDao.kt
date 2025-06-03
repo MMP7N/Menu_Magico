@@ -2,7 +2,7 @@ package com.example.recipesapp.db.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.recipesapp.domain.model.Meal
+import com.example.recipesapp.data.db.entity.Meal
 
 // DAO (Data Access Object) para la entidad Meal.
 // Define las operaciones que se pueden realizar en la base de datos relacionadas con las comidas.

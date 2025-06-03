@@ -1,8 +1,8 @@
 package com.example.recipesapp.retrofit
 
-import com.example.recipesapp.domain.model.CategoryList
-import com.example.recipesapp.domain.model.MealsByCategoryList
-import com.example.recipesapp.domain.model.MealList
+import com.example.recipesapp.data.db.entity.CategoryList
+import com.example.recipesapp.data.db.entity.MealsByCategoryList
+import com.example.recipesapp.data.db.entity.MealList
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

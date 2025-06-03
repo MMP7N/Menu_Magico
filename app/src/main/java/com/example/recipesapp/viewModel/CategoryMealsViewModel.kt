@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.recipesapp.domain.model.MealsByCategory
-import com.example.recipesapp.domain.model.MealsByCategoryList
+import com.example.recipesapp.data.db.entity.MealsByCategory
+import com.example.recipesapp.data.db.entity.MealsByCategoryList
 import com.example.recipesapp.retrofit.RetrofitInstance
 import retrofit2.Call
 import retrofit2.Callback

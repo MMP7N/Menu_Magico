@@ -14,7 +14,7 @@ import com.example.recipesapp.R
 import com.example.recipesapp.adapters.IngredientsAdapter
 import com.example.recipesapp.databinding.ActivityMealBinding
 import com.example.recipesapp.db.MealDatabase
-import com.example.recipesapp.domain.model.Meal
+import com.example.recipesapp.data.db.entity.Meal
 import com.example.recipesapp.fragments.HomeFragment
 import com.example.recipesapp.viewModel.MealViewModel
 import com.example.recipesapp.viewModel.MealViewModelFactory

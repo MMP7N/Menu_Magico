@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.recipesapp.databinding.CategoryItemBinding
-import com.example.recipesapp.domain.model.Category
+import com.example.recipesapp.data.db.entity.Category
 
 class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.CategoryViewHolder>() {
 
