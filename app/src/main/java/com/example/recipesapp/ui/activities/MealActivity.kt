@@ -1,5 +1,6 @@
 package com.example.recipesapp.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -32,6 +33,7 @@ class MealActivity : AppCompatActivity() {
 
     private var mealToSave: Meal? = null
 
+    // Inicializa la vista, el ViewModel y configura los elementos de la pantalla
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMealBinding.inflate(layoutInflater)
@@ -50,6 +52,7 @@ class MealActivity : AppCompatActivity() {
         onFavoriteButtonClick()
     }
 
+    // Obtiene los datos del intent (ID, nombre e imagen de la receta)
     private fun getInformationFromIntent() {
         intent?.let {
             mealId = it.getStringExtra(HomeFragment.MEAL_ID) ?: ""
@@ -58,6 +61,7 @@ class MealActivity : AppCompatActivity() {
         }
     }
 
+    // Establece la imagen y el título de la receta en la interfaz
     private fun setInformationInViews() {
         Glide.with(this)
             .load(mealThumb)
@@ -72,6 +76,7 @@ class MealActivity : AppCompatActivity() {
         )
     }
 
+    // Muestra el indicador de carga y oculta elementos hasta tener los datos
     private fun loadingCase() {
         binding.progressBar.visibility = View.VISIBLE
         binding.btnAddFav.visibility = View.INVISIBLE
@@ -81,6 +86,7 @@ class MealActivity : AppCompatActivity() {
         binding.imgYoutube.visibility = View.INVISIBLE
     }
 
+    // Muestra los elementos de la vista una vez cargados los datos
     private fun onResponseCase() {
         binding.progressBar.visibility = View.INVISIBLE
         binding.btnAddFav.visibility = View.VISIBLE
@@ -90,12 +96,13 @@ class MealActivity : AppCompatActivity() {
         binding.imgYoutube.visibility = View.VISIBLE
     }
 
+    // Observa los detalles de la receta y los muestra en la pantalla
+    @SuppressLint("SetTextI18n")
     private fun observerMealDetailsLiveData() {
         mealMvvm.observerMealDetailsLiveData().observe(this) { meal ->
             onResponseCase()
             mealToSave = meal
 
-            binding.tvCategory.text = "Category: ${meal?.strCategory ?: "N/A"}"
             binding.tvArea.text = "Area: ${meal?.strArea ?: "N/A"}"
             binding.tvInstructions.text = meal?.strInstructions ?: ""
             youtubeLink = meal?.strYoutube ?: ""
@@ -107,6 +114,7 @@ class MealActivity : AppCompatActivity() {
         }
     }
 
+    // Abre el enlace de YouTube al hacer clic en el ícono correspondiente
     private fun onYoutubeImageClick() {
         binding.imgYoutube.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW, youtubeLink.toUri())
@@ -114,6 +122,7 @@ class MealActivity : AppCompatActivity() {
         }
     }
 
+    // Guarda la receta como favorita y muestra un mensaje
     private fun onFavoriteButtonClick() {
         binding.btnAddFav.setOnClickListener {
             mealToSave?.let {
@@ -123,6 +132,7 @@ class MealActivity : AppCompatActivity() {
         }
     }
 
+    // Obtiene la lista de ingredientes y medidas de la receta utilizando reflexión
     private fun getIngredientsList(meal: Meal): List<IngredientsAdapter.Ingredient> {
         val list = mutableListOf<IngredientsAdapter.Ingredient>()
         val cls = meal::class.java
