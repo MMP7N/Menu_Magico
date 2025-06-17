@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.recipesapp.data.db.entity.Area
+import com.example.recipesapp.data.db.entity.AreaList
 import com.example.recipesapp.db.MealDatabase
 import com.example.recipesapp.data.db.entity.Category
 import com.example.recipesapp.data.db.entity.CategoryList
@@ -30,6 +32,7 @@ class HomeViewModel(
     private var favoriteMealsLiveData = mealDatabase.mealDao().getAllMeals()
     private var bottomSheetMealLiveData = MutableLiveData<Meal>()
     private val searchMealLiveData = MutableLiveData<List<Meal>>()
+    private val areasLiveData = MutableLiveData<List<Area>>()
 
     // Función para obtener una comida aleatoria de la API
     private var saveStateRandomMeal: Meal? = null
@@ -144,6 +147,22 @@ class HomeViewModel(
             }
         })
     }
+    fun getAreas() {
+        RetrofitInstance.api.getAreas().enqueue(object : Callback<AreaList> {
+            override fun onResponse(call: Call<AreaList>, response: Response<AreaList>) {
+                if (response.isSuccessful && response.body() != null) {
+                    areasLiveData.postValue(response.body()!!.meals)
+                } else {
+                    Log.d("HomeViewModel", "Respuesta fallida o body null en getAreas")
+                }
+            }
+
+            override fun onFailure(call: Call<AreaList>, t: Throwable) {
+                Log.d("HomeViewModel", "Error en getAreas: ${t.message}")
+                areasLiveData.postValue(emptyList())
+            }
+        })
+    }
 
     // Métodos para observar los LiveData correspondientes
 
@@ -167,4 +186,6 @@ class HomeViewModel(
         return favoriteMealsLiveData
     }
     fun observeBottomSheetMeal(): LiveData<Meal> = bottomSheetMealLiveData
+
+    fun observeAreasLiveData(): LiveData<List<Area>> = areasLiveData
 }

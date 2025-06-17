@@ -1,5 +1,6 @@
 package com.example.recipesapp.retrofit
 
+import com.example.recipesapp.data.db.entity.AreaList
 import com.example.recipesapp.data.db.entity.CategoryList
 import com.example.recipesapp.data.db.entity.MealsByCategoryList
 import com.example.recipesapp.data.db.entity.MealList
@@ -33,4 +34,9 @@ interface MealApi {
     // Llama a la API para buscar comidas por nombre
     @GET("search.php")
     fun searchMeal(@Query("s") searchQuery: String): Call<MealList>
+
+    // Llama a la API para obtener la lista de áreas (áreas de comida)
+    @GET("list.php?a=list")
+    fun getAreas(): Call<AreaList>
+
 }
