@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipesapp.R
@@ -16,7 +16,7 @@ import com.example.recipesapp.viewModel.HomeViewModel
 class AreaFragment : Fragment() {
 
     private lateinit var areaAdapter: AreaAdapter
-    private val homeViewModel: HomeViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,23 +32,18 @@ class AreaFragment : Fragment() {
 
         areaAdapter = AreaAdapter(emptyList()) { area -> onAreaClicked(area) }
 
-        // LayoutManager tipo grid (2 columnas) para mostrar mejor las áreas
-        rvArea.layoutManager = GridLayoutManager(requireContext(), 2)
+        rvArea.layoutManager = GridLayoutManager(requireContext(), 3)
         rvArea.adapter = areaAdapter
 
-        // Observamos LiveData de áreas
         homeViewModel.observeAreasLiveData().observe(viewLifecycleOwner) { areas ->
             areaAdapter.setData(areas)
         }
 
-        // Pedimos cargar las áreas
         homeViewModel.getAreas()
     }
 
     private fun onAreaClicked(area: Area) {
-        // Aquí puedes manejar el clic en un área, por ejemplo:
-        // Mostrar detalles, filtrar comidas por área, navegar a otro fragmento, etc.
-        // Por ejemplo:
         println("Área clicada: ${area.strArea}")
     }
 }
+
