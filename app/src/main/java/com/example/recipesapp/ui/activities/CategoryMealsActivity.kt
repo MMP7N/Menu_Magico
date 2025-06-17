@@ -26,13 +26,23 @@ class CategoryMealsActivity : AppCompatActivity() {
 
         categoryMealsViewModel = ViewModelProvider(this)[CategoryMealsViewModel::class.java]
 
-        categoryMealsViewModel.getMealsByCategory(intent.getStringExtra(HomeFragment.CATEGORY_NAME)!!)
+        val categoryName = intent.getStringExtra(HomeFragment.CATEGORY_NAME)
+        val areaName = intent.getStringExtra("AREA_NAME")
+
+        if (categoryName != null) {
+            categoryMealsViewModel.getMealsByCategory(categoryName)
+        }
+
+        if (areaName != null) {
+            categoryMealsViewModel.getMealsByArea(areaName)
+        }
 
         categoryMealsViewModel.observeMealsLiveData().observe(this) { mealsList ->
             binding.tvCategoryCount.text = mealsList.size.toString()
             categoryMealsAdapter.setMealsList(mealsList)
         }
     }
+
 
     // Configura el RecyclerView con un GridLayoutManager y el adaptador
     private fun prepareRecyclerView() {

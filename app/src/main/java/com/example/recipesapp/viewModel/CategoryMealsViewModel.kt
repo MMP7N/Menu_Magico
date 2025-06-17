@@ -43,4 +43,21 @@ class CategoryMealsViewModel(): ViewModel() {
     fun observeMealsLiveData(): LiveData<List<MealsByCategory>> {
         return mealsLiveData
     }
+
+    fun getMealsByArea(areaName: String) {
+        RetrofitInstance.api.getMealsByArea(areaName).enqueue(object : Callback<MealsByCategoryList> {
+            override fun onResponse(
+                call: Call<MealsByCategoryList>,
+                response: Response<MealsByCategoryList>
+            ) {
+                response.body()?.let { mealsList ->
+                    mealsLiveData.postValue(mealsList.meals)
+                }
+            }
+
+            override fun onFailure(call: Call<MealsByCategoryList>, t: Throwable) {
+                Log.e("CategoryMealsViewModel", t.message.toString())
+            }
+        })
+    }
 }

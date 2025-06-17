@@ -1,5 +1,6 @@
 package com.example.recipesapp.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipesapp.R
+import com.example.recipesapp.activities.CategoryMealsActivity
 import com.example.recipesapp.adapter.AreaAdapter
 import com.example.recipesapp.data.db.entity.Area
 import com.example.recipesapp.viewModel.HomeViewModel
@@ -18,17 +20,17 @@ class AreaFragment : Fragment() {
     private lateinit var areaAdapter: AreaAdapter
     private val homeViewModel: HomeViewModel by activityViewModels()
 
+    private lateinit var rvArea: RecyclerView
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_area, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.fragment_area, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val rvArea = view.findViewById<RecyclerView>(R.id.rv_area)
+        rvArea = view.findViewById(R.id.rv_area)
 
         areaAdapter = AreaAdapter(emptyList()) { area -> onAreaClicked(area) }
 
@@ -43,7 +45,11 @@ class AreaFragment : Fragment() {
     }
 
     private fun onAreaClicked(area: Area) {
-        println("Área clicada: ${area.strArea}")
+        val intent = Intent(requireContext(), CategoryMealsActivity::class.java)
+        intent.putExtra("AREA_NAME", area.strArea)
+        startActivity(intent)
     }
+
 }
+
 
