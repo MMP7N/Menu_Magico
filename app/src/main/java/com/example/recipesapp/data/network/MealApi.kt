@@ -6,6 +6,7 @@ import com.example.recipesapp.data.db.entity.MealsByCategoryList
 import com.example.recipesapp.data.db.entity.MealList
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 // Interfaz que define las llamadas a la API para obtener datos relacionados con las recetas
@@ -38,5 +39,8 @@ interface MealApi {
     // Llama a la API para obtener la lista de áreas (áreas de comida)
     @GET("list.php?a=list")
     fun getAreas(): Call<AreaList>
+
+    @GET("filter.php?a={areaName}")
+    fun getMealsByArea(@Path("areaName") areaName: String): Call<MealsByCategoryList>
 
 }
