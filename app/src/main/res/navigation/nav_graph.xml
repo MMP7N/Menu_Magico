@@ -15,10 +15,10 @@
             app:destination="@id/searchFragment" />
     </fragment>
     <fragment
-        android:id="@+id/categoriesFragment"
-        android:name="com.example.recipesapp.fragments.CategoriesFragment"
-        android:label="fragment_categories"
-        tools:layout="@layout/fragment_categories" />
+        android:id="@+id/areaFragment"
+        android:name="com.example.recipesapp.fragments.AreaFragment"
+        android:label="fragment_area"
+        tools:layout="@layout/fragment_area" />
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.example.recipesapp.fragments.FavoritesFragment"
