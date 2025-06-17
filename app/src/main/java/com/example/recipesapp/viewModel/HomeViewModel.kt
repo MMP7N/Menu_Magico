@@ -33,6 +33,7 @@ class HomeViewModel(
     private var bottomSheetMealLiveData = MutableLiveData<Meal>()
     private val searchMealLiveData = MutableLiveData<List<Meal>>()
     private val areasLiveData = MutableLiveData<List<Area>>()
+    private val mealsByAreaLiveData = MutableLiveData<List<MealsByCategory>>()
 
     // Función para obtener una comida aleatoria de la API
     private var saveStateRandomMeal: Meal? = null
@@ -163,6 +164,19 @@ class HomeViewModel(
             }
         })
     }
+    fun getMealsByArea(areaName: String) {
+        RetrofitInstance.api.getMealsByArea(areaName).enqueue(object : Callback<MealsByCategoryList> {
+            override fun onResponse(call: Call<MealsByCategoryList>, response: Response<MealsByCategoryList>) {
+                if (response.body() != null) {
+                    mealsByAreaLiveData.postValue(response.body()!!.meals)
+                }
+            }
+            override fun onFailure(call: Call<MealsByCategoryList>, t: Throwable) {
+                Log.d("HomeViewModel", "Error getMealsByArea: ${t.message}")
+                mealsByAreaLiveData.postValue(emptyList())
+            }
+        })
+    }
 
     // Métodos para observar los LiveData correspondientes
 
@@ -188,4 +202,7 @@ class HomeViewModel(
     fun observeBottomSheetMeal(): LiveData<Meal> = bottomSheetMealLiveData
 
     fun observeAreasLiveData(): LiveData<List<Area>> = areasLiveData
+
+    fun observeMealsByAreaLiveData(): LiveData<List<MealsByCategory>> = mealsByAreaLiveData
+
 }
