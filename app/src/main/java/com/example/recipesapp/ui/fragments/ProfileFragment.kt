@@ -54,7 +54,6 @@ class ProfileFragment : Fragment() {
                         .error(R.drawable.ic_profile)
                         .into(profileImageView)
 
-                    // Guardar URI temporal en SharedPreferences para mantenerla si se cambia imagen pero aún no se guarda DB
                     sharedPref.edit {
                         putString("profile_pic_uri_temp", imageUri.toString())
                         remove("profile_pic_temp")
@@ -99,7 +98,6 @@ class ProfileFragment : Fragment() {
         userNameTextView.text = userName
         userEmailTextView.text = userEmail
 
-        // Cargar datos guardados en BD para este usuario
         cargarDatosUsuario(userName)
 
         profileImageView.setOnClickListener {
@@ -126,7 +124,6 @@ class ProfileFragment : Fragment() {
         userNameTextView.text = userDetails["username"] ?: username
         userEmailTextView.text = userDetails["email"] ?: ""
 
-        // Cargar preferencias y favoritos desde BD o SharedPreferences
         val prefsFromDB = userDetails["preferences"]
         val favsFromDB = userDetails["favorites"]
 
@@ -168,7 +165,6 @@ class ProfileFragment : Fragment() {
         val preferences = preferencesEditText.text.toString()
         val favorites = favoritesEditText.text.toString()
 
-        // Guardar en SharedPreferences (opcional)
         sharedPref.edit {
             putString("preferences_$username", preferences)
             putString("favorites_$username", favorites)
@@ -192,7 +188,6 @@ class ProfileFragment : Fragment() {
         Toast.makeText(requireContext(), "Saved changes", Toast.LENGTH_SHORT).show()
     }
 
-
     private fun showImageSelectionDialog() {
         val options = arrayOf("Choose image from gallery", "Enter image URL")
         AlertDialog.Builder(requireContext())
@@ -214,13 +209,9 @@ class ProfileFragment : Fragment() {
         }
 
         when {
-            ContextCompat.checkSelfPermission(
-                requireContext(),
-                permiso
-            ) == PackageManager.PERMISSION_GRANTED -> {
+            ContextCompat.checkSelfPermission(requireContext(), permiso) == PackageManager.PERMISSION_GRANTED -> {
                 openGallery()
             }
-
             shouldShowRequestPermissionRationale(permiso) -> {
                 AlertDialog.Builder(requireContext())
                     .setTitle("Permission required")
@@ -231,7 +222,6 @@ class ProfileFragment : Fragment() {
                     .setNegativeButton("Cancel", null)
                     .show()
             }
-
             else -> {
                 requestPermissionLauncher.launch(permiso)
             }
