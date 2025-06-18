@@ -62,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Food preferences"
+        android:text="Description"
         android:textColor="@color/accent"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -74,12 +74,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:hint="Enter your dietary preferences"
+        android:hint="Enter your general description"
         android:textColor="@color/black"
         android:textSize="14sp"
+        android:lines="4"
+        android:inputType="textMultiLine"
+        android:gravity="top|start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/preferences_title" />
+
 
     <!-- Ingredientes favoritos -->
     <TextView
@@ -87,7 +91,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Favorite ingredients"
+        android:text="Food preferences"
         android:textColor="@color/accent"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -99,7 +103,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:hint="Enter favorite ingredients"
+        android:hint="Enter your dietary preferences"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
