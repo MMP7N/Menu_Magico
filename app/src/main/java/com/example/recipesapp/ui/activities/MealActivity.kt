@@ -104,6 +104,7 @@ class MealActivity : AppCompatActivity() {
             mealToSave = meal
 
             binding.tvArea.text = "Area: ${meal?.strArea ?: "N/A"}"
+            binding.tvCategory.text = "Category: ${meal?.strCategory ?: "N/A"}"
             binding.tvInstructions.text = meal?.strInstructions ?: ""
             youtubeLink = meal?.strYoutube ?: ""
 
@@ -113,6 +114,7 @@ class MealActivity : AppCompatActivity() {
             binding.rvIngredients.adapter = ingredientsAdapter
         }
     }
+
 
     // Abre el enlace de YouTube al hacer clic en el ícono correspondiente
     private fun onYoutubeImageClick() {
