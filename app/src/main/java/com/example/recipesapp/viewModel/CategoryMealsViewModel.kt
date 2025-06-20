@@ -11,7 +11,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-// ViewModel que maneja la lógica para obtener las comidas por categoría
+// AuthViewModel que maneja la lógica para obtener las comidas por categoría
 class CategoryMealsViewModel(): ViewModel() {
 
     // LiveData mutable que almacena la lista de comidas por categoría

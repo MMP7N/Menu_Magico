@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.app.DatabaseHelper
 import kotlinx.coroutines.launch
 
-class ViewModel(application: Application) : AndroidViewModel(application) {
+class AuthViewModel(application: Application) : AndroidViewModel(application) {
     private val databaseHelper = DatabaseHelper(application)
     val loginResult = MutableLiveData<Boolean>()
     val signupResult = MutableLiveData<Long>()

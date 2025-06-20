@@ -10,7 +10,7 @@ class MealViewModelFactory(
     private val mealDatabase: MealDatabase
 ) : ViewModelProvider.Factory {
 
-    // Esta función se sobrecarga para crear la instancia del ViewModel con el parámetro necesario
+    // Esta función se sobrecarga para crear la instancia del AuthViewModel con el parámetro necesario
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return MealViewModel(mealDatabase) as T
     }

@@ -21,7 +21,7 @@ class FavoritesFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
     private lateinit var favoritesAdapter: MealsAdapter
 
-    // Se obtiene el ViewModel de la actividad principal para compartir datos entre fragmentos
+    // Se obtiene el AuthViewModel de la actividad principal para compartir datos entre fragmentos
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = (activity as MainActivity).viewModel

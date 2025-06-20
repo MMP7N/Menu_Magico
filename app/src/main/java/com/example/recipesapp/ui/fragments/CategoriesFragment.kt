@@ -21,7 +21,7 @@ class CategoriesFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Se obtiene el ViewModel desde la actividad principal
+        // Se obtiene el AuthViewModel desde la actividad principal
         viewModel = (activity as MainActivity).viewModel
     }
 
@@ -41,7 +41,7 @@ class CategoriesFragment : Fragment() {
         observeCategories()
     }
 
-    // Método que observa los datos de las categorías del ViewModel
+    // Método que observa los datos de las categorías del AuthViewModel
     private fun observeCategories() {
         // Observa los cambios en la lista de categorías y actualiza el adaptador
         viewModel.observeCategoriesLiveData().observe(viewLifecycleOwner) { categories ->

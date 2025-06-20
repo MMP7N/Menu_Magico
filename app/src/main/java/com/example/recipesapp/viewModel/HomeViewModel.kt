@@ -20,7 +20,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-// ViewModel que maneja la lógica de la pantalla principal
+// AuthViewModel que maneja la lógica de la pantalla principal
 class HomeViewModel(
     private val mealDatabase: MealDatabase // Dependencia de la base de datos local
 ) : ViewModel() {

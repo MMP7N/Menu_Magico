@@ -14,7 +14,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-// ViewModel encargado de manejar la lógica para obtener y manejar los detalles de una comida.
+// AuthViewModel encargado de manejar la lógica para obtener y manejar los detalles de una comida.
 class MealViewModel(
     val mealDatabase: MealDatabase
 ) : ViewModel() {

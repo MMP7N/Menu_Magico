@@ -33,7 +33,7 @@ class MealActivity : AppCompatActivity() {
 
     private var mealToSave: Meal? = null
 
-    // Inicializa la vista, el ViewModel y configura los elementos de la pantalla
+    // Inicializa la vista, el AuthViewModel y configura los elementos de la pantalla
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMealBinding.inflate(layoutInflater)
